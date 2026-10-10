@@ -55,6 +55,8 @@ padding:16px 34px;border-radius:999px;box-shadow:0 6px 0 #B5501F,0 14px 30px rgb
 .btn:hover{transform:translateY(-2px)}
 .btn:active{transform:translateY(4px);box-shadow:0 2px 0 #B5501F,0 6px 16px rgba(255,122,61,.3)}
 .btn:focus-visible{outline:3px solid var(--gold);outline-offset:4px}
+.actions{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;align-items:center}
+a.btn{text-decoration:none;display:inline-block}
 .btn.ghost{background:transparent;color:var(--ink);box-shadow:none;border:2px solid var(--line);font-size:17px;padding:12px 24px}
 /* question */
 .card{position:relative;background:var(--card);border:1px solid var(--soft);border-radius:24px;padding:20px 18px 18px;box-shadow:0 18px 40px rgba(0,0,0,.35)}
@@ -144,7 +146,7 @@ canvas#fx{position:fixed;inset:0;pointer-events:none;z-index:20}
     <div class="rank" id="rank"></div>
     <p class="sub" id="rankText"></p>
     <div class="stats"><div class="chip">⭐ <b id="xpEnd">0</b> XP</div><div class="chip streak">🔥 <span id="bestLabel"></span> <b id="bestEnd">0</b></div></div>
-    <button class="btn" id="again"></button>
+    <div class="actions"><button class="btn" id="again"></button><a class="btn ghost" id="share" target="_blank" rel="noopener"></a></div>
   </section>
 </div>
 
@@ -195,7 +197,8 @@ const QUESTIONS = [
 const STR = {
   en:{sub:"How much do you know about the AI that fits in your pocket and works in airplane mode?",
       rules:["10 questions","20 s each","⭐ XP + speed bonus","🔥 streak"], start:"Start", next:"Next ➜", result:"See results ➜",
-      hits:"correct", best:"best streak", again:"Play again", right:"Correct", rightStreak:(n)=>`Correct · 🔥 ${n} in a row`,
+      hits:"correct", best:"best streak", again:"Play again", share:"Share on 𝕏",
+      tweet:(h,n,rank,grid,xp,best)=>`I got ${h}/${n} on the BOAR Quiz: ${rank} 🐗\n${grid}\n⭐ ${xp} XP · 🔥 best streak ${best}\n\nHow much do you know about the AI that works in airplane mode?`, right:"Correct", rightStreak:(n)=>`Correct · 🔥 ${n} in a row`,
       almost:"Not quite", timeout:"Time's up",
       ranks:[[10,"Sanctuary Master","You know it all: you could explain BOAR to anyone, even in airplane mode."],
              [8,"Offline Guardian","Almost perfect. Reread the FAQ and come back for all 10."],
@@ -203,7 +206,8 @@ const STR = {
              [0,"Curious Boar","Every boar starts here. Open the FAQ and try again."]]},
   pt:{sub:"Quanto você sabe sobre a IA que cabe no seu bolso e funciona em modo avião?",
       rules:["10 perguntas","20 s cada","⭐ XP + bônus de rapidez","🔥 sequência"], start:"Começar", next:"Próxima ➜", result:"Ver resultado ➜",
-      hits:"acertos", best:"melhor sequência", again:"Jogar de novo", right:"Certo!", rightStreak:(n)=>`Certo! 🔥 ${n} seguidas`,
+      hits:"acertos", best:"melhor sequência", again:"Jogar de novo", share:"Compartilhar no 𝕏",
+      tweet:(h,n,rank,grid,xp,best)=>`Fiz ${h}/${n} no Quiz BOAR: ${rank} 🐗\n${grid}\n⭐ ${xp} XP · 🔥 melhor sequência ${best}\n\nQuanto você sabe sobre a IA que funciona em modo avião?`, right:"Certo!", rightStreak:(n)=>`Certo! 🔥 ${n} seguidas`,
       almost:"Quase!", timeout:"O tempo acabou!",
       ranks:[[10,"Mestre do Santuário","Você sabe tudo: pode explicar o BOAR para qualquer um, até em modo avião."],
              [8,"Guardião Offline","Quase perfeito. Releia a FAQ e volte para fechar as 10."],
@@ -224,7 +228,7 @@ function applyLang(){
   document.title = lang === "pt" ? "BOAR · Quiz" : "BOAR · Quiz";
   $("sub").textContent = T().sub;
   $("rules").innerHTML = T().rules.map(r => `<span>${r}</span>`).join("");
-  $("start").textContent = T().start; $("again").textContent = T().again;
+  $("start").textContent = T().start; $("again").textContent = T().again; $("share").textContent = T().share;
   $("hitsLabel").textContent = T().hits; $("bestLabel").textContent = T().best;
   for (const b of document.querySelectorAll(".lang button")) b.setAttribute("aria-pressed", b.dataset.lang === lang);
   if ($("end").classList.contains("on")) rankText();
@@ -308,7 +312,17 @@ function finish(){
   if(hits>=8)setTimeout(()=>bigConfetti(),300);
 }
 
-function rankText(){const [, title, text]=T().ranks.find(r=>hits>=r[0]);$("rank").textContent=title;$("rankText").textContent=text}
+function rankText(){const [, title, text]=T().ranks.find(r=>hits>=r[0]);$("rank").textContent=title;$("rankText").textContent=text;shareLink(title)}
+
+// opened from disk there is no public URL to share, so point at the live site
+const SITE = "https://boar-faq-quiz.vercel.app/";
+function shareLink(title){
+  const base = location.protocol.startsWith("http") ? location.origin + location.pathname : SITE;
+  const url = lang === "pt" ? base + "?lang=pt" : base;
+  const grid = results.map(ok => ok ? "🟩" : "🟥").join("");
+  const text = T().tweet(hits, QUESTIONS.length, title, grid, xp, best);
+  $("share").href = "https://x.com/intent/post?" + new URLSearchParams({text, url});
+}
 
 /* effects */
 function floatXP(el,text){const r=el.getBoundingClientRect();const f=document.createElement("div");f.className="float";f.textContent=text;f.style.left=(r.left+r.width/2)+"px";f.style.top=(r.top-10)+"px";document.body.append(f);setTimeout(()=>f.remove(),1100)}
