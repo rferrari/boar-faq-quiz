@@ -139,7 +139,7 @@ canvas#fx{position:fixed;inset:0;pointer-events:none;z-index:20}
       <svg width="190" height="190"><circle cx="95" cy="95" r="82" fill="none" stroke="#4A3526" stroke-width="14"/>
       <circle id="arc" cx="95" cy="95" r="82" fill="none" stroke="url(#g)" stroke-width="14" stroke-linecap="round" stroke-dasharray="515.2" stroke-dashoffset="515.2"/>
       <defs><linearGradient id="g"><stop offset="0" stop-color="#FFC15E"/><stop offset="1" stop-color="#FF7A3D"/></linearGradient></defs></svg>
-      <div class="val"><div><span id="hits">0</span>/9<small id="hitsLabel"></small></div></div>
+      <div class="val"><div><span id="hits">0</span>/<span id="total">10</span><small id="hitsLabel"></small></div></div>
     </div>
     <div class="rank" id="rank"></div>
     <p class="sub" id="rankText"></p>
@@ -186,24 +186,28 @@ const QUESTIONS = [
     why:"O app é gratuito, de código aberto (MIT), sem assinatura e sem exigir nenhum token."},
    en:{topic:"Token", q:"Do I need the $boar token to use the app?", opts:["Yes, to unlock it","Only for the larger models","No; the app is free and open source (MIT)"],
     why:"The app is free and open source (MIT), with no subscription and no token required."}},
+  {a:0, pt:{topic:"Modos de resposta", q:"Como você controla o jeito de o BOAR responder?", opts:["Escolhe um estilo (Sucinto, Detalhado, Resumo executivo ou o seu) e liga a Pesquisa Profunda quando quiser","Só pagando um plano premium","Não dá: o app decide sozinho"],
+    why:"Sucinto e direto é o mais rápido e o padrão no celular; Detalhado explica com comparações; Resumo executivo dá a conclusão e 3 tópicos. A Pesquisa Profunda é um botão à parte: pesquisa em várias etapas nos knowledge packs, offline, e funciona com qualquer estilo."},
+   en:{topic:"Answer modes", q:"How do you control the way BOAR answers?", opts:["Pick a style (Succinct, Detailed, Executive Summary or your own) and turn on Deep Research when you want","Only with a premium plan","You can't: the app decides on its own"],
+    why:"Succinct & Direct is the fastest and the default on phones; Thorough & Detailed explains with comparisons; Executive Summary gives the takeaway and 3 bullets. Deep Research is a separate switch: it researches in several passes over the knowledge packs, offline, and works with any style."}},
 ];
 // every word on screen, in both languages; English first
 const STR = {
   en:{sub:"How much do you know about the AI that fits in your pocket and works in airplane mode?",
-      rules:["9 questions","20 s each","⭐ XP + speed bonus","🔥 streak"], start:"Start", next:"Next ➜", result:"See results ➜",
+      rules:["10 questions","20 s each","⭐ XP + speed bonus","🔥 streak"], start:"Start", next:"Next ➜", result:"See results ➜",
       hits:"correct", best:"best streak", again:"Play again", right:"Correct", rightStreak:(n)=>`Correct · 🔥 ${n} in a row`,
       almost:"Not quite", timeout:"Time's up",
-      ranks:[[9,"Sanctuary Master","You know it all: you could explain BOAR to anyone, even in airplane mode."],
-             [7,"Offline Guardian","Almost perfect. Reread the FAQ and come back for all 9."],
-             [4,"Field Explorer","Good start. The FAQ answers what was missing."],
+      ranks:[[10,"Sanctuary Master","You know it all: you could explain BOAR to anyone, even in airplane mode."],
+             [8,"Offline Guardian","Almost perfect. Reread the FAQ and come back for all 10."],
+             [5,"Field Explorer","Good start. The FAQ answers what was missing."],
              [0,"Curious Boar","Every boar starts here. Open the FAQ and try again."]]},
   pt:{sub:"Quanto você sabe sobre a IA que cabe no seu bolso e funciona em modo avião?",
-      rules:["9 perguntas","20 s cada","⭐ XP + bônus de rapidez","🔥 sequência"], start:"Começar", next:"Próxima ➜", result:"Ver resultado ➜",
+      rules:["10 perguntas","20 s cada","⭐ XP + bônus de rapidez","🔥 sequência"], start:"Começar", next:"Próxima ➜", result:"Ver resultado ➜",
       hits:"acertos", best:"melhor sequência", again:"Jogar de novo", right:"Certo!", rightStreak:(n)=>`Certo! 🔥 ${n} seguidas`,
       almost:"Quase!", timeout:"O tempo acabou!",
-      ranks:[[9,"Mestre do Santuário","Você sabe tudo: pode explicar o BOAR para qualquer um, até em modo avião."],
-             [7,"Guardião Offline","Quase perfeito. Releia a FAQ e volte para fechar as 9."],
-             [4,"Explorador de Campo","Bom começo. A FAQ responde o que faltou."],
+      ranks:[[10,"Mestre do Santuário","Você sabe tudo: pode explicar o BOAR para qualquer um, até em modo avião."],
+             [8,"Guardião Offline","Quase perfeito. Releia a FAQ e volte para fechar as 10."],
+             [5,"Explorador de Campo","Bom começo. A FAQ responde o que faltou."],
              [0,"Javali Curioso","Todo javali começa assim. Abra a FAQ e tente de novo."]]},
 };
 let lang = (() => {
@@ -300,8 +304,8 @@ function finish(){
   const arc=$("arc"),len=515.2; arc.style.transition="none"; arc.style.strokeDashoffset=len; void arc.offsetWidth;
   arc.style.transition="stroke-dashoffset 1.4s cubic-bezier(.2,.9,.3,1)"; arc.style.strokeDashoffset=len*(1-hits/QUESTIONS.length);
   rankText();
-  mascot($("endMascot"),hits>=7?"happy":"idle");
-  if(hits>=7)setTimeout(()=>bigConfetti(),300);
+  mascot($("endMascot"),hits>=8?"happy":"idle");
+  if(hits>=8)setTimeout(()=>bigConfetti(),300);
 }
 
 function rankText(){const [, title, text]=T().ranks.find(r=>hits>=r[0]);$("rank").textContent=title;$("rankText").textContent=text}
