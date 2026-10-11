@@ -2,7 +2,7 @@
 
 > **Credits:** the BOAR FAQ and every question in this quiz were written by **[Amandita (@AAmandita_)](https://x.com/AAmandita_)**, based on her Zebra Talks interview with the BOAR team for the Zcash community. Thank you, Amandita! 🦓🐗
 
-A short quiz about BOAR, in English (default) and Portuguese (`?lang=pt` or the EN · PT switch): 10 questions on offline AI, privacy, hardware, answer modes and the app. One self-contained page, no tracking.
+A short quiz about BOAR, in English (default) and Portuguese (`?lang=pt` or the EN · PT switch): 10 questions on offline AI, privacy, hardware, answer modes and the app. One self-contained page with self-hosted fonts: no tracking, no third-party requests.
 
 Open `index.html` in a browser, or https://boar-faq-quiz.vercel.app.
 
@@ -72,3 +72,7 @@ The whole history stays on the device only. There is no sync and no automatic cl
 
 **9. Do I need to buy the $BOAR token to use the app?**
 No. The app is free and open source (MIT license), with no subscription and no token required.
+
+## License
+
+Code: [MIT](LICENSE). Fonts: Baloo 2 and Lexend, self-hosted under the [SIL Open Font License 1.1](fonts/OFL.txt).
