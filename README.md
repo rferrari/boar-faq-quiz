@@ -53,10 +53,10 @@ The language model runs on the phone's processor (CPU) and RAM. The knowledge co
 
 **3. What are the hardware requirements?**
 Minimum: phones with 4 GB of RAM run the compact model, Qwen2.5-1.5B, which takes about 1 GB of storage.
-Recommended: with 12 GB of RAM, the phone runs larger, more accurate models such as Qwen3-4B.
+Recommended: Qwen3-4B (about 2.5 GB) is the default on bigger phones and works best with 12 GB of RAM.
 
 **4. Does the app send telemetry or track the user?**
-No. There is no telemetry by default, no tracking, no crash reports and no collection servers. The only exception is the performance benchmark: you can choose to share anonymous metrics about your chip and generation speed (tok/s) for the public device ranking.
+No. There is no telemetry by default, no tracking, no crash reports and no collection servers. The only exception is the performance benchmark: you can choose to share an evaluation run (phone model, chip, scores and generation speed in tok/s, nothing that identifies you) on the public results.
 
 **5. Why start with Android and an APK?**
 The project was born from Vitalik Buterin's challenge (bounty #31 on poidh): a local AI that runs on GrapheneOS without depending on Google Play Services. The APK allows sovereign distribution that doesn't depend on app stores. An iOS version exists in a separate branch.
@@ -68,7 +68,7 @@ Yes. Running a model on the device itself demands a lot from the processor. Batt
 Smaller models can hallucinate on generic or complex questions. To reduce that, BOAR searches the knowledge packs before answering (local RAG), and every answer shows its sources and the excerpt the information came from, so you can check it.
 
 **8. Where are my chats kept? Is there a cloud backup?**
-The whole history stays on the device only. There is no sync and no automatic cloud backup. If you delete the app or its data, the chats are removed from the phone for good.
+The whole history stays on the device only. There is no sync and no automatic cloud backup (Android; on iPhone, app data can be included in your iCloud backup). If you delete the app or its data, the chats are removed from the phone for good.
 
 **9. Do I need to buy the $BOAR token to use the app?**
 No. The app is free and open source (MIT license), with no subscription and no token required.
