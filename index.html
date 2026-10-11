@@ -4,9 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>BOAR · Quiz</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Lexend:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preload" href="fonts/baloo2-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="fonts/lexend-latin.woff2" as="font" type="font/woff2" crossorigin>
 <style>
+@font-face{font-family:"Baloo 2";font-style:normal;font-weight:700 800;font-display:swap;src:url(fonts/baloo2-latin.woff2) format("woff2")}
+@font-face{font-family:"Lexend";font-style:normal;font-weight:400 700;font-display:swap;src:url(fonts/lexend-latin.woff2) format("woff2")}
 :root{--bg:#17110D;--surface:#1C1510;--card:#221913;--card2:#2A1F17;--line:#4A3526;--soft:rgba(245,233,220,.08);
 --ember:#FF7A3D;--ember2:#FF915C;--gold:#FFC15E;--ink:#F5E9DC;--ink2:#D8CABA;--muted:#B3A596;--dim:#8A7B6C;--ok:#7BD88F;--bad:#F26951;
 --d:"Baloo 2","Trebuchet MS",sans-serif;--b:"Lexend","Segoe UI",system-ui,sans-serif}
@@ -185,13 +186,13 @@ const QUESTIONS = [
    en:{topic:"Offline", q:"With no internet, where does the model run?", opts:["On a BOAR server","On the phone's processor and RAM","On your computer's graphics card"],
     why:"On the phone's CPU and RAM. The knowledge comes from the model itself and the knowledge packs: Wikipedia, emergency manuals and guides, downloaded once."}},
   {a:0, pt:{topic:"Hardware", q:"Quanta RAM precisa, no mínimo, para o modelo compacto?", opts:["4 GB","16 GB","32 GB"],
-    why:"4 GB rodam o Qwen2.5-1.5B (cerca de 1 GB de armazenamento). Com 12 GB, modelos maiores como o Qwen3-4B."},
+    why:"4 GB rodam o Qwen2.5-1.5B (cerca de 1 GB de armazenamento). O Qwen3-4B (cerca de 2,5 GB) é o padrão em aparelhos maiores e funciona melhor com 12 GB."},
    en:{topic:"Hardware", q:"How much RAM does the compact model need, at least?", opts:["4 GB","16 GB","32 GB"],
-    why:"4 GB runs Qwen2.5-1.5B (about 1 GB of storage). With 12 GB, larger models such as Qwen3-4B."}},
+    why:"4 GB runs Qwen2.5-1.5B (about 1 GB of storage). Qwen3-4B (about 2.5 GB) is the default on bigger phones and works best with 12 GB."}},
   {a:2, pt:{topic:"Privacidade", q:"O BOAR envia telemetria?", opts:["Sim, sempre","Só quando está no Wi-Fi","Não; só se você escolher compartilhar o benchmark"],
-    why:"Sem telemetria, rastreamento ou coleta. A única exceção é opcional: compartilhar métricas anônimas de velocidade no ranking público de aparelhos."},
+    why:"Sem telemetria, rastreamento ou coleta. A única exceção é opcional: compartilhar uma avaliação (modelo do aparelho, chip, notas e velocidades, nada que identifique você) nos resultados públicos."},
    en:{topic:"Privacy", q:"Does BOAR send telemetry?", opts:["Yes, always","Only on Wi-Fi","No; only if you choose to share the benchmark"],
-    why:"No telemetry, tracking or collection. The one exception is opt-in: sharing speed numbers, without your identity, on the public device leaderboard."}},
+    why:"No telemetry, tracking or collection. The one exception is opt-in: sharing an evaluation run (phone model, chip, scores and speeds, nothing that identifies you) on the public results."}},
   {a:0, pt:{topic:"Origem", q:"Por que começar pelo Android e por APK?", opts:["Para rodar no GrapheneOS sem Google Play Services","Porque o iPhone não tem RAM suficiente","Para cobrar assinatura fora da loja"],
     why:"O desafio do Vitalik (bounty #31 no poidh) pede IA local no GrapheneOS, sem Google. O APK não depende de lojas. O iOS existe em uma branch separada."},
    en:{topic:"Origin", q:"Why start with Android and an APK?", opts:["To run on GrapheneOS without Google Play Services","Because iPhones don't have enough RAM","To charge a subscription outside the store"],
