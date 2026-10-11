@@ -179,6 +179,10 @@ canvas#fx{position:fixed;inset:0;pointer-events:none;z-index:20}
 .faqEnd{display:grid;justify-items:center;gap:12px;margin-top:22px}
 .faqFoot{margin-top:26px;text-align:center;color:var(--dim);font-size:13px}
 .faqFoot a{color:var(--muted)}
+.site{color:var(--muted);font:500 14px var(--b);text-decoration:none;padding:4px 10px;border-radius:999px}
+.site b{color:var(--ink2);font-weight:600}
+.site:hover{color:var(--ink)}
+.site:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}body::before{animation:none}}
 </style>
 </head>
@@ -202,6 +206,7 @@ canvas#fx{position:fixed;inset:0;pointer-events:none;z-index:20}
     <p class="rules" id="rules"></p>
     <button class="btn" id="start"></button>
     <button type="button" class="prep" id="prep"></button>
+    <a class="site" id="siteIntro" href="https://boarapp.com/" target="_blank" rel="noopener"></a>
   </section>
 
   <section class="screen" id="play">
@@ -230,6 +235,7 @@ canvas#fx{position:fixed;inset:0;pointer-events:none;z-index:20}
     <a class="credit" href="https://x.com/AAmandita_" target="_blank" rel="noopener">✍️ <span class="creditLabel"></span> <b>@AAmandita_</b></a>
     <div class="actions"><button class="btn" id="again"></button><a class="btn ghost" id="share" target="_blank" rel="noopener"></a></div>
     <button type="button" class="prep" id="review"></button>
+    <a class="site" id="getApp" href="https://boarapp.com/" target="_blank" rel="noopener"></a>
   </section>
 
   <section class="screen" id="study">
@@ -247,8 +253,9 @@ canvas#fx{position:fixed;inset:0;pointer-events:none;z-index:20}
     <div class="faqEnd">
       <a class="credit" href="https://x.com/AAmandita_" target="_blank" rel="noopener">✍️ <span class="faqCredit"></span> <b>@AAmandita_</b></a>
       <button class="btn" id="ready"></button>
+      <a class="site" id="siteFaq" href="https://boarapp.com/" target="_blank" rel="noopener"></a>
     </div>
-    <footer class="faqFoot">BOAR · Knowledge you can carry · <a href="https://github.com/rferrari/boar-app" target="_blank" rel="noopener">github.com/rferrari/boar-app</a></footer>
+    <footer class="faqFoot">BOAR · Knowledge you can carry · <a href="https://boarapp.com/" target="_blank" rel="noopener">boarapp.com</a> · <a href="https://github.com/rferrari/boar-app" target="_blank" rel="noopener">github.com/rferrari/boar-app</a></footer>
   </section>
 </div>
 
@@ -331,6 +338,7 @@ const STR = {
       search:"Search a question…", empty:"No question with that term.", missed:"Missed", faqCredit:"FAQ by",
       pillTitle:"In short", pillText:"The pillars of the BOAR manifesto.", pills:["Privacy","Computational sovereignty","Works in airplane mode","Verifiable sources"],
       ready:"I'm ready ➜", resume:"Back to the quiz ➜", mascot:"The BOAR boar",
+      site:"🐗 What is BOAR? <b>boarapp.com</b> ↗", getApp:"🐗 Get BOAR: <b>boarapp.com</b> ↗",
       ranks:[[10,"Sanctuary Master","You know it all: you could explain BOAR to anyone, even in airplane mode."],
              [8,"Offline Guardian","Almost perfect. Reread the FAQ and come back for all 10."],
              [5,"Field Explorer","Good start. The FAQ answers what was missing."],
@@ -346,6 +354,7 @@ const STR = {
       search:"Buscar uma pergunta…", empty:"Nenhuma pergunta com esse termo.", missed:"Você errou", faqCredit:"FAQ por",
       pillTitle:"Em resumo", pillText:"Os pilares do manifesto do BOAR.", pills:["Privacidade","Soberania computacional","Funciona em modo avião","Fontes verificáveis"],
       ready:"Bora jogar ➜", resume:"Voltar ao quiz ➜", mascot:"O javali do BOAR",
+      site:"🐗 O que é o BOAR? <b>boarapp.com</b> ↗", getApp:"🐗 Baixe o BOAR: <b>boarapp.com</b> ↗",
       ranks:[[10,"Mestre do Santuário","Você sabe tudo: pode explicar o BOAR para qualquer um, até em modo avião."],
              [8,"Guardião Offline","Quase perfeito. Releia a FAQ e volte para fechar as 10."],
              [5,"Explorador de Campo","Bom começo. A FAQ responde o que faltou."],
@@ -394,6 +403,7 @@ function applyLang(){
   $("pillTitle").textContent = T().pillTitle; $("pillText").textContent = T().pillText;
   $("pills").innerHTML = T().pills.map(p => `<span>${p}</span>`).join("");
   $("ready").textContent = from === "play" ? T().resume : T().ready;
+  $("siteIntro").innerHTML = $("siteFaq").innerHTML = T().site; $("getApp").innerHTML = T().getApp;
   renderFaq();
   if ($("end").classList.contains("on")) rankText();
 }

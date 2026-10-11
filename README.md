@@ -4,6 +4,8 @@
 
 A short quiz about BOAR, in English (default) and Portuguese (`?lang=pt` or the EN · PT switch): 10 questions on offline AI, privacy, hardware, answer modes and the app. Get prepared first with the built-in FAQ (also at `#faq`): during the game, every answer links to its FAQ entry, and the results screen opens the ones you missed. One static page with self-hosted fonts: no tracking, no third-party requests.
 
+About BOAR: **https://boarapp.com**
+
 Play at https://boar-faq-quiz.vercel.app, or download the repo (**Code → Download ZIP**, or `git clone`) and open `index.html` in a browser. Keep the files together: the page loads `mascot.png` and `fonts/` from its own folder.
 
 <p align="center">
