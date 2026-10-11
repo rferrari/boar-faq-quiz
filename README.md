@@ -2,14 +2,18 @@
 
 > **Credits:** the BOAR FAQ and every question in this quiz were written by **[Amandita (@AAmandita_)](https://x.com/AAmandita_)**, based on her Zebra Talks interview with the BOAR team for the Zcash community. Thank you, Amandita! 🦓🐗
 
-A short quiz about BOAR, in English (default) and Portuguese (`?lang=pt` or the EN · PT switch): 10 questions on offline AI, privacy, hardware, answer modes and the app. One self-contained page with self-hosted fonts: no tracking, no third-party requests.
+A short quiz about BOAR, in English (default) and Portuguese (`?lang=pt` or the EN · PT switch): 10 questions on offline AI, privacy, hardware, answer modes and the app. Get prepared first with the built-in FAQ (also at `#faq`): during the game, every answer links to its FAQ entry, and the results screen opens the ones you missed. One static page with self-hosted fonts: no tracking, no third-party requests.
 
-Open `index.html` in a browser, or https://boar-faq-quiz.vercel.app.
+About BOAR: **https://boarapp.com**
+
+Play at https://boar-faq-quiz.vercel.app, or download the repo (**Code → Download ZIP**, or `git clone`) and open `index.html` in a browser. Keep the files together: the page loads `mascot.png` and `fonts/` from its own folder.
 
 <p align="center">
-  <img src="screenshots/start.png" alt="Start page: choose your level" width="300">
-  &nbsp;&nbsp;
-  <img src="screenshots/results.png" alt="Results page with the max score: 10/10, 5250 XP on Hard" width="300">
+  <img src="screenshots/start.png" alt="Start page: choose your level" width="260">
+  &nbsp;
+  <img src="screenshots/faq.png" alt="Get prepared: the built-in FAQ with search" width="260">
+  &nbsp;
+  <img src="screenshots/results.png" alt="Results page with the max score: 10/10, 5250 XP on Hard" width="260">
 </p>
 
 **Max score:** 10/10 on Hard, answering every question instantly: **5,250 XP**, best streak 10, rank *Sanctuary Master*.
